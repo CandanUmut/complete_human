@@ -1,34 +1,40 @@
 import { useEffect, useRef, useState } from 'react';
 import { Play, Pause, RotateCcw, Wind, Timer as TimerIcon, Brain } from 'lucide-react';
+import { useTranslation } from '../../hooks/useTranslation';
+import { HelpTooltip } from '../ui/HelpTooltip';
 
 type Mode = null | 'meditation' | 'deep' | 'box' | 'sigh';
 
 export function Timers() {
   const [mode, setMode] = useState<Mode>(null);
+  const { t } = useTranslation();
 
   return (
     <section className="card p-5">
-      <h2 className="h-section mb-3">Timers & breath</h2>
+      <div className="flex items-center gap-2 mb-3">
+        <h2 className="h-section">{t('timers.title')}</h2>
+        <HelpTooltip text={t('help.breathing')} />
+      </div>
       <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
         <button onClick={() => setMode('meditation')} className={`btn-ghost !rounded-xl !py-3 flex-col border border-black/5 dark:border-white/10 ${mode === 'meditation' ? 'bg-black/5 dark:bg-white/5' : ''}`}>
-          <Brain size={18} /><span className="text-xs">Meditation</span>
+          <Brain size={18} /><span className="text-xs">{t('timers.meditation')}</span>
         </button>
         <button onClick={() => setMode('deep')} className={`btn-ghost !rounded-xl !py-3 flex-col border border-black/5 dark:border-white/10 ${mode === 'deep' ? 'bg-black/5 dark:bg-white/5' : ''}`}>
-          <TimerIcon size={18} /><span className="text-xs">Deep work</span>
+          <TimerIcon size={18} /><span className="text-xs">{t('timers.deep')}</span>
         </button>
         <button onClick={() => setMode('box')} className={`btn-ghost !rounded-xl !py-3 flex-col border border-black/5 dark:border-white/10 ${mode === 'box' ? 'bg-black/5 dark:bg-white/5' : ''}`}>
-          <Wind size={18} /><span className="text-xs">Box breath</span>
+          <Wind size={18} /><span className="text-xs">{t('timers.box')}</span>
         </button>
         <button onClick={() => setMode('sigh')} className={`btn-ghost !rounded-xl !py-3 flex-col border border-black/5 dark:border-white/10 ${mode === 'sigh' ? 'bg-black/5 dark:bg-white/5' : ''}`}>
-          <Wind size={18} /><span className="text-xs">Cyclic sigh</span>
+          <Wind size={18} /><span className="text-xs">{t('timers.sigh')}</span>
         </button>
       </div>
 
       <div className="mt-4">
-        {mode === 'meditation' && <CountdownTimer label="Meditation" presets={[10, 15, 20, 25]} />}
-        {mode === 'deep' && <CountdownTimer label="Deep work" presets={[25, 45, 90]} />}
-        {mode === 'box' && <BreathingGuide pattern={[4, 4, 4, 4]} labels={['Inhale', 'Hold', 'Exhale', 'Hold']} />}
-        {mode === 'sigh' && <BreathingGuide pattern={[2, 1, 6, 0]} labels={['Inhale', 'Top-up', 'Long exhale', '']} />}
+        {mode === 'meditation' && <CountdownTimer label={t('timers.meditation')} presets={[10, 15, 20, 25]} />}
+        {mode === 'deep' && <CountdownTimer label={t('timers.deep')} presets={[25, 45, 90]} />}
+        {mode === 'box' && <BreathingGuide pattern={[4, 4, 4, 4]} kinds={['inhale', 'hold', 'exhale', 'hold']} labels={[t('breathing.inhale'), t('breathing.hold'), t('breathing.exhale'), t('breathing.hold')]} />}
+        {mode === 'sigh' && <BreathingGuide pattern={[2, 1, 6, 0]} kinds={['inhale', 'inhale', 'exhale', 'none']} labels={[t('breathing.inhale'), t('breathing.topup'), t('breathing.long_exhale'), '']} />}
       </div>
     </section>
   );
@@ -38,6 +44,7 @@ function CountdownTimer({ label, presets }: { label: string; presets: number[] }
   const [minutes, setMinutes] = useState(presets[0]);
   const [remaining, setRemaining] = useState(presets[0] * 60);
   const [running, setRunning] = useState(false);
+  const { t } = useTranslation();
   const ref = useRef<number | null>(null);
 
   useEffect(() => { setRemaining(minutes * 60); }, [minutes]);
@@ -71,8 +78,8 @@ function CountdownTimer({ label, presets }: { label: string; presets: number[] }
       </div>
       <div className="font-serif text-5xl tabular-nums text-center">{mm}:{ss}</div>
       <div className="mt-3 flex justify-center gap-2">
-        <button onClick={() => setRunning((r) => !r)} className="btn">{running ? <Pause size={14} /> : <Play size={14} />}{running ? 'Pause' : 'Start'}</button>
-        <button onClick={() => { setRunning(false); setRemaining(minutes * 60); }} className="btn-ghost"><RotateCcw size={14} /> Reset</button>
+        <button onClick={() => setRunning((r) => !r)} className="btn">{running ? <Pause size={14} /> : <Play size={14} />}{running ? t('timers.pause') : t('timers.start')}</button>
+        <button onClick={() => { setRunning(false); setRemaining(minutes * 60); }} className="btn-ghost"><RotateCcw size={14} /> {t('timers.reset')}</button>
       </div>
     </div>
   );
@@ -94,10 +101,12 @@ function bell() {
   } catch {/* noop */}
 }
 
-function BreathingGuide({ pattern, labels }: { pattern: number[]; labels: string[] }) {
+type BreathKind = 'inhale' | 'hold' | 'exhale' | 'none';
+function BreathingGuide({ pattern, labels, kinds }: { pattern: number[]; labels: string[]; kinds: BreathKind[] }) {
   const [running, setRunning] = useState(false);
   const [phase, setPhase] = useState(0);
   const [cycles, setCycles] = useState(0);
+  const { t } = useTranslation();
   const totals = pattern.filter((p) => p > 0);
   const activeLabels = labels.filter((_, i) => pattern[i] > 0);
 
@@ -105,17 +114,19 @@ function BreathingGuide({ pattern, labels }: { pattern: number[]; labels: string
     if (!running) return;
     const step = pattern[phase];
     if (step === 0) { setPhase((p) => (p + 1) % pattern.length); return; }
-    const t = window.setTimeout(() => {
+    const timer = window.setTimeout(() => {
       const next = (phase + 1) % pattern.length;
       setPhase(next);
       if (next === 0) setCycles((c) => c + 1);
     }, step * 1000);
-    return () => window.clearTimeout(t);
+    return () => window.clearTimeout(timer);
   }, [phase, running, pattern]);
 
   const activePhaseIdx = Math.max(0, pattern.slice(0, phase + 1).filter((p) => p > 0).length - 1);
-  const isInhaleLike = activeLabels[activePhaseIdx]?.toLowerCase().includes('inhale') || activeLabels[activePhaseIdx]?.toLowerCase().includes('top-up');
-  const isExhale = activeLabels[activePhaseIdx]?.toLowerCase().includes('exhale');
+  const activeKinds = kinds.filter((_, i) => pattern[i] > 0);
+  const currentKind = activeKinds[activePhaseIdx];
+  const isInhaleLike = currentKind === 'inhale';
+  const isExhale = currentKind === 'exhale';
 
   return (
     <div className="rounded-xl p-6 bg-black/5 dark:bg-white/5 flex flex-col items-center">
@@ -128,15 +139,15 @@ function BreathingGuide({ pattern, labels }: { pattern: number[]; labels: string
           transitionDuration: `${(pattern[phase] || 1) * 1000}ms`,
         }}
       >
-        <span className="font-serif text-lg">{running ? activeLabels[activePhaseIdx] : 'Ready'}</span>
+        <span className="font-serif text-lg">{running ? activeLabels[activePhaseIdx] : t('breathing.ready')}</span>
       </div>
-      <div className="mt-3 text-xs opacity-60">Pattern: {totals.join('-')} · cycles: {cycles}</div>
+      <div className="mt-3 text-xs opacity-60">{t('breathing.pattern')}: {totals.join('-')} · {t('breathing.cycles')}: {cycles}</div>
       <div className="mt-4 flex gap-2">
         <button onClick={() => setRunning((r) => !r)} className="btn">
-          {running ? <Pause size={14} /> : <Play size={14} />}{running ? 'Pause' : 'Start'}
+          {running ? <Pause size={14} /> : <Play size={14} />}{running ? t('timers.pause') : t('timers.start')}
         </button>
         <button onClick={() => { setRunning(false); setPhase(0); setCycles(0); }} className="btn-ghost">
-          <RotateCcw size={14} /> Reset
+          <RotateCcw size={14} /> {t('timers.reset')}
         </button>
       </div>
     </div>

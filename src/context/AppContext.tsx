@@ -36,6 +36,8 @@ interface Ctx {
   addAudit: (e: Omit<SkillsAudit, 'id'>) => void;
   replaceState: (s: AppState) => void;
   clearAll: () => void;
+  markBannerSeen: (id: import('../types').BannerId) => void;
+  resetOnboarding: () => void;
 }
 
 const AppCtx = createContext<Ctx | null>(null);
@@ -107,6 +109,14 @@ export function AppProvider({ children }: { children: ReactNode }) {
         update((s) => ({ ...s, skillsAudits: [{ ...e, id: uid() }, ...s.skillsAudits] })),
       replaceState: (s) => setState(() => s),
       clearAll: () => setState(() => INITIAL_STATE),
+      markBannerSeen: (id) =>
+        update((s) => {
+          const seen = s.settings.seenBanners ?? [];
+          if (seen.includes(id)) return s;
+          return { ...s, settings: { ...s.settings, seenBanners: [...seen, id] } };
+        }),
+      resetOnboarding: () =>
+        update((s) => ({ ...s, settings: { ...s.settings, onboardingComplete: false } })),
     };
   }, [state, setState]);
 

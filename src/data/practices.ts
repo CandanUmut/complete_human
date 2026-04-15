@@ -4,8 +4,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Foundation
   {
     id: 'meditation-10',
-    name: '10-min meditation or contemplative prayer',
-    description: 'Mindfulness, loving-kindness, or structured prayer in your tradition. Davidson and MBSR research show measurable neural and physiological effects.',
+    name: { en: '10-min meditation or contemplative prayer', tr: '10 dk meditasyon veya tefekkür duası' },
+    description: {
+      en: 'Mindfulness, loving-kindness, or structured prayer in your tradition. Davidson and MBSR research show measurable neural and physiological effects.',
+      tr: 'Farkındalık, sevgi-şefkat ya da kendi geleneğinde yapılandırılmış dua. Davidson ve MBSR araştırmaları ölçülebilir sinirsel ve fizyolojik etkiler gösterir.',
+    },
     layer: 'foundation',
     timeMinutes: 10,
     frequency: 'daily',
@@ -17,8 +20,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'evening-review',
-    name: 'Evening review',
-    description: 'Marcus Aurelius-style review: what went well, what could improve. Stoic journaling has empirical support for emotional regulation.',
+    name: { en: 'Evening review', tr: 'Akşam değerlendirmesi' },
+    description: {
+      en: 'Marcus Aurelius-style review: what went well, what could improve. Stoic journaling has empirical support for emotional regulation.',
+      tr: 'Marcus Aurelius tarzı değerlendirme: ne iyi gitti, neyi geliştirebilirim. Stoacı günlük tutma duygu düzenlemesi için deneysel destek görür.',
+    },
     layer: 'foundation',
     timeMinutes: 5,
     frequency: 'daily',
@@ -30,8 +36,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'uncertainty-statement',
-    name: 'State uncertainty explicitly once today',
-    description: 'Build habitual truthfulness and intellectual humility. "I\'m not sure, but…"',
+    name: { en: 'State uncertainty explicitly once today', tr: 'Bugün belirsizliğini bir kez açıkça ifade et' },
+    description: {
+      en: 'Build habitual truthfulness and intellectual humility. "I\'m not sure, but…"',
+      tr: 'Alışkanlık halinde dürüstlüğü ve entelektüel alçakgönüllülüğü inşa et. “Emin değilim ama…”',
+    },
     layer: 'foundation',
     timeMinutes: 1,
     frequency: 'daily',
@@ -42,8 +51,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Relational
   {
     id: 'deep-listening',
-    name: 'Deep listening — one conversation, no interrupting',
-    description: 'Rogers and Weger: active listening produces measurably greater feelings of being understood. 5+ minutes, no advice.',
+    name: { en: 'Deep listening — one conversation, no interrupting', tr: 'Derin dinleme — bir sohbet, kesmeden' },
+    description: {
+      en: 'Rogers and Weger: active listening produces measurably greater feelings of being understood. 5+ minutes, no advice.',
+      tr: 'Rogers ve Weger: aktif dinleme, anlaşılma hissini ölçülebilir biçimde artırır. 5+ dakika, öğüt yok.',
+    },
     layer: 'relational',
     timeMinutes: 10,
     frequency: 'daily',
@@ -54,8 +66,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'loving-kindness',
-    name: 'Loving-kindness meditation',
-    description: 'Singer\'s ReSource project: compassion training changes brain structure differently than mindfulness alone.',
+    name: { en: 'Loving-kindness meditation', tr: 'Sevgi-şefkat meditasyonu' },
+    description: {
+      en: "Singer's ReSource project: compassion training changes brain structure differently than mindfulness alone.",
+      tr: "Singer'in ReSource projesi: şefkat antrenmanı, sadece farkındalıktan farklı biçimde beyin yapısını değiştirir.",
+    },
     layer: 'relational',
     timeMinutes: 10,
     frequency: 'daily',
@@ -66,8 +81,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'nvc-reflection',
-    name: 'NVC reflection on a difficult interaction',
-    description: 'Rosenberg\'s 4 steps — observation, feeling, need, request. Use the NVC tool.',
+    name: { en: 'NVC reflection on a difficult interaction', tr: 'Zor bir etkileşim üzerine ŞİD yansıması' },
+    description: {
+      en: "Rosenberg's 4 steps — observation, feeling, need, request. Use the NVC tool.",
+      tr: "Rosenberg'in 4 adımı — gözlem, duygu, ihtiyaç, rica. ŞİD aracını kullan.",
+    },
     layer: 'relational',
     timeMinutes: 5,
     frequency: 'asNeeded',
@@ -79,8 +97,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Cognitive
   {
     id: 'sift',
-    name: 'SIFT one article or claim',
-    description: 'Stop, Investigate source, Find better coverage, Trace claims. Wineburg fact-checker method.',
+    name: { en: 'SIFT one article or claim', tr: 'Bir makale veya iddiayı SIFT\'ten geçir' },
+    description: {
+      en: 'Stop, Investigate source, Find better coverage, Trace claims. Wineburg fact-checker method.',
+      tr: 'Dur, Kaynağı araştır, Daha iyi haber bul, İddiaları kökenine izle. Wineburg\'un olgu denetleme yöntemi.',
+    },
     layer: 'cognitive',
     timeMinutes: 5,
     frequency: 'daily',
@@ -92,8 +113,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'decision-journal',
-    name: 'Decision journal entry with confidence %',
-    description: 'Tetlock-style prediction tracking. Log one prediction with calibrated confidence.',
+    name: { en: 'Decision journal entry with confidence %', tr: 'Güven yüzdesiyle karar günlüğü kaydı' },
+    description: {
+      en: 'Tetlock-style prediction tracking. Log one prediction with calibrated confidence.',
+      tr: 'Tetlock tarzı öngörü takibi. Kalibre edilmiş güvenle bir öngörü kaydet.',
+    },
     layer: 'cognitive',
     timeMinutes: 5,
     frequency: 'daily',
@@ -104,8 +128,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'deep-read-20',
-    name: 'Read 20 minutes (deep / paper)',
-    description: 'Maryanne Wolf\'s deep-reading research — uninterrupted long-form reading builds analytic capacity.',
+    name: { en: 'Read 20 minutes (deep / paper)', tr: '20 dakika derin okuma (basılı)' },
+    description: {
+      en: "Maryanne Wolf's deep-reading research — uninterrupted long-form reading builds analytic capacity.",
+      tr: "Maryanne Wolf'un derin okuma araştırması — kesintisiz uzun okuma analitik kapasiteyi inşa eder.",
+    },
     layer: 'cognitive',
     timeMinutes: 20,
     frequency: 'daily',
@@ -117,8 +144,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'spaced-repetition',
-    name: 'Spaced repetition review',
-    description: 'Dunlosky (2013): one of only two "high utility" learning techniques. 10 minutes of active recall.',
+    name: { en: 'Spaced repetition review', tr: 'Aralıklı tekrar incelemesi' },
+    description: {
+      en: 'Dunlosky (2013): one of only two "high utility" learning techniques. 10 minutes of active recall.',
+      tr: 'Dunlosky (2013): “yüksek fayda” etiketli iki öğrenme tekniğinden biri. 10 dakika aktif hatırlama.',
+    },
     layer: 'cognitive',
     timeMinutes: 10,
     frequency: 'daily',
@@ -129,8 +159,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Physical
   {
     id: 'exercise-30',
-    name: '30-minute exercise',
-    description: 'Strength, cardio, mobility, or walk. WHO guidelines: 150 min/week moderate aerobic + 2x strength.',
+    name: { en: '30-minute exercise', tr: '30 dakika egzersiz' },
+    description: {
+      en: 'Strength, cardio, mobility, or walk. WHO guidelines: 150 min/week moderate aerobic + 2x strength.',
+      tr: 'Kuvvet, kardiyo, mobilite veya yürüyüş. DSÖ önerisi: 150 dk/hafta orta tempo aerobik + haftada 2 kuvvet.',
+    },
     layer: 'physical',
     timeMinutes: 30,
     frequency: 'daily',
@@ -142,8 +175,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'sleep-prep',
-    name: 'Sleep prep ritual started by target time',
-    description: 'Walker: consistent sleep window > total hours. Dim light, no screens, wind down.',
+    name: { en: 'Sleep prep ritual started by target time', tr: 'Uyku hazırlığı rutini hedef saatte başlasın' },
+    description: {
+      en: 'Walker: consistent sleep window > total hours. Dim light, no screens, wind down.',
+      tr: 'Walker: tutarlı uyku penceresi toplam saatten önemlidir. Işıkları kıs, ekran yok, yavaşla.',
+    },
     layer: 'physical',
     timeMinutes: 15,
     frequency: 'daily',
@@ -154,8 +190,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'cyclic-sigh',
-    name: 'Cyclic sighing (5 min)',
-    description: 'Balban & Huberman (2023): cyclic sighing outperformed mindfulness and other breathwork for mood and HRV.',
+    name: { en: 'Cyclic sighing (5 min)', tr: 'Döngüsel iç çekme (5 dk)' },
+    description: {
+      en: 'Balban & Huberman (2023): cyclic sighing outperformed mindfulness and other breathwork for mood and HRV.',
+      tr: 'Balban & Huberman (2023): döngüsel iç çekme, ruh hali ve HRV için farkındalık ve diğer nefes çalışmalarını geride bıraktı.',
+    },
     layer: 'physical',
     timeMinutes: 5,
     frequency: 'daily',
@@ -167,8 +206,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Practical
   {
     id: 'budget-check',
-    name: 'Weekly budget check',
-    description: 'Behavioral finance: attention to finances beats willpower. 10 minutes once a week.',
+    name: { en: 'Weekly budget check', tr: 'Haftalık bütçe kontrolü' },
+    description: {
+      en: 'Behavioral finance: attention to finances beats willpower. 10 minutes once a week.',
+      tr: 'Davranışsal finans: paraya ayrılan dikkat iradeden güçlüdür. Haftada bir 10 dakika.',
+    },
     layer: 'practical',
     timeMinutes: 10,
     frequency: 'weekly',
@@ -178,8 +220,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'deep-work-block',
-    name: '90-min deep work block',
-    description: 'Newport: single-tasking on cognitively demanding work. No context switching.',
+    name: { en: '90-min deep work block', tr: '90 dk derin çalışma bloğu' },
+    description: {
+      en: 'Newport: single-tasking on cognitively demanding work. No context switching.',
+      tr: 'Newport: bilişsel olarak zor işte tek-görev. Bağlam değişimi yok.',
+    },
     layer: 'practical',
     timeMinutes: 90,
     frequency: 'daily',
@@ -190,8 +235,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Civic
   {
     id: 'third-place',
-    name: 'Spend time in a third place or community',
-    description: 'Klinenberg: social infrastructure predicts resilience. Coffee shop, library, gym, mosque, church.',
+    name: { en: 'Spend time in a third place or community', tr: 'Bir üçüncü mekânda ya da toplulukta zaman geçir' },
+    description: {
+      en: 'Klinenberg: social infrastructure predicts resilience. Coffee shop, library, gym, mosque, church.',
+      tr: 'Klinenberg: sosyal altyapı dayanıklılığı öngörür. Kafe, kütüphane, spor salonu, cami, kilise.',
+    },
     layer: 'civic',
     timeMinutes: 30,
     frequency: 'weekly',
@@ -201,8 +249,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'lateral-reading',
-    name: 'Lateral reading on one civic topic',
-    description: 'Stanford fact-checkers method: read across sources before trusting any one.',
+    name: { en: 'Lateral reading on one civic topic', tr: 'Bir toplumsal konuda yatay okuma' },
+    description: {
+      en: 'Stanford fact-checkers method: read across sources before trusting any one.',
+      tr: 'Stanford olgu denetçileri yöntemi: tek bir kaynağa güvenmeden önce kaynaklar arasında oku.',
+    },
     layer: 'civic',
     timeMinutes: 10,
     frequency: 'weekly',
@@ -213,8 +264,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Adaptive
   {
     id: 'skill-learning',
-    name: 'Deliberate practice on a new skill (20 min)',
-    description: 'Ericsson: targeted, effortful practice at the edge of current ability.',
+    name: { en: 'Deliberate practice on a new skill (20 min)', tr: 'Yeni bir beceride kasıtlı pratik (20 dk)' },
+    description: {
+      en: 'Ericsson: targeted, effortful practice at the edge of current ability.',
+      tr: 'Ericsson: mevcut yeteneğin sınırında hedefli, çabalı pratik.',
+    },
     layer: 'adaptive',
     timeMinutes: 20,
     frequency: 'daily',
@@ -224,8 +278,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'pre-mortem',
-    name: 'Pre-mortem on an upcoming decision',
-    description: 'Klein: imagine the decision has failed. What went wrong? Reduces overconfidence.',
+    name: { en: 'Pre-mortem on an upcoming decision', tr: 'Yaklaşan bir karar için ön-mortem' },
+    description: {
+      en: 'Klein: imagine the decision has failed. What went wrong? Reduces overconfidence.',
+      tr: 'Klein: kararın başarısız olduğunu hayal et. Ne ters gitti? Aşırı güveni azaltır.',
+    },
     layer: 'adaptive',
     timeMinutes: 10,
     frequency: 'asNeeded',
@@ -237,8 +294,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   // Integration
   {
     id: 'skills-audit',
-    name: 'Quarterly skills audit across 8 layers',
-    description: 'Structured reflection — not a scored quiz. Rate engagement per layer, note patterns.',
+    name: { en: 'Quarterly skills audit across 8 layers', tr: '8 katmanda üç aylık beceri değerlendirmesi' },
+    description: {
+      en: 'Structured reflection — not a scored quiz. Rate engagement per layer, note patterns.',
+      tr: 'Yapılandırılmış yansıma — puanlı bir test değil. Her katmanda katılımı derecelendir, örüntüleri not et.',
+    },
     layer: 'integration',
     timeMinutes: 15,
     frequency: 'asNeeded',
@@ -249,8 +309,11 @@ export const DEFAULT_PRACTICES: Practice[] = [
   },
   {
     id: 'teach-one-thing',
-    name: 'Teach or share something learned',
-    description: 'Protégé effect: teaching consolidates learning more than restudy.',
+    name: { en: 'Teach or share something learned', tr: 'Öğrendiğin bir şeyi öğret ya da paylaş' },
+    description: {
+      en: 'Protégé effect: teaching consolidates learning more than restudy.',
+      tr: 'Çırak etkisi: öğretmek, yeniden çalışmaktan daha fazla pekiştirir.',
+    },
     layer: 'integration',
     timeMinutes: 15,
     frequency: 'weekly',

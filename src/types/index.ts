@@ -25,10 +25,12 @@ export type ToolType =
   | 'exercise'
   | null;
 
+import type { MaybeLocalized } from '../i18n';
+
 export interface Practice {
   id: string;
-  name: string;
-  description: string;
+  name: MaybeLocalized<string>;
+  description: MaybeLocalized<string>;
   layer: Layer;
   timeMinutes: number;
   frequency: Frequency;
@@ -116,11 +118,15 @@ export interface SkillsAudit {
   notes?: Partial<Record<Layer, string>>;
 }
 
+export type BannerId = 'learn' | 'progress' | 'decision' | 'tools' | 'practices';
+
 export interface Settings {
   theme: 'light' | 'dark' | 'system';
+  language: 'en' | 'tr';
   currentPhase: Phase;
   onboardingComplete: boolean;
   createdAt: string;
+  seenBanners?: BannerId[];
 }
 
 export interface AppState {
