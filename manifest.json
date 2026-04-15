@@ -1,0 +1,18 @@
+{
+  "name": "The Complete Human",
+  "short_name": "Complete Human",
+  "description": "Evidence-based personal development. Private, offline-first.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F5F0EB",
+  "theme_color": "#2D2B2E",
+  "icons": [
+    {
+      "src": "./favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
