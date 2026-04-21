@@ -54,14 +54,21 @@ export interface DecisionEntry {
   confidence: 50 | 60 | 70 | 80 | 90 | 95;
   outcome: 'pending' | 'correct' | 'incorrect';
   resolvedAt?: string;
+  resolveBy?: string; // yyyy-mm-dd — user's predicted resolution date
   notes?: string;
 }
 
 export interface JournalEntry {
   id: string;
   date: string;
+  // Evening review core (optional — some entries are free-form or prompt-driven)
   wentWell: string;
   improve: string;
+  // Extensions — all optional for backwards compatibility
+  kind?: 'evening' | 'quick' | 'prompt';
+  body?: string; // free-form text or prompt answer
+  promptId?: string; // identifier from prompt bank if the entry is prompt-driven
+  tags?: string[];
 }
 
 export interface SiftEntry {
@@ -127,6 +134,11 @@ export interface Settings {
   onboardingComplete: boolean;
   createdAt: string;
   seenBanners?: BannerId[];
+  starredPromptIds?: string[];
+  shownPromptIds?: string[]; // rotate fairly over time
+  lastWeeklyReviewAt?: string; // ISO
+  dismissedNudges?: string[];
+  lastNudgeShownAt?: string; // ISO — throttle to 1 per app session / day
 }
 
 export interface AppState {

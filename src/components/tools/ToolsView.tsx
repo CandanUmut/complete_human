@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DecisionJournal } from './DecisionJournal';
 import { SIFTTracker } from './SIFTTracker';
 import { EveningReview } from './EveningReview';
@@ -7,16 +7,23 @@ import { PreMortem } from './PreMortem';
 import { SkillsAudit } from './SkillsAudit';
 import { ReadingLog } from './ReadingLog';
 import { ExerciseLog } from './ExerciseLog';
-import { Brain, Search, BookOpen, MessageSquareHeart, AlertTriangle, Layers, Book, Dumbbell } from 'lucide-react';
+import { QuickJournal } from './QuickJournal';
+import {
+  Brain, Search, BookOpen, MessageSquareHeart, AlertTriangle,
+  Layers, Book, Dumbbell, PenLine,
+} from 'lucide-react';
 import { useTranslation } from '../../hooks/useTranslation';
 import { FirstVisitBanner } from '../ui/FirstVisitBanner';
 
-type Tool = 'decision' | 'sift' | 'evening' | 'nvc' | 'premortem' | 'skills' | 'reading' | 'exercise';
+export type ToolId =
+  | 'decision' | 'sift' | 'evening' | 'nvc' | 'premortem'
+  | 'skills' | 'reading' | 'exercise' | 'quick_journal';
 
-const TOOL_META: { id: Tool; Icon: typeof Brain; labelKey: string; blurbKey: string }[] = [
+const TOOL_META: { id: ToolId; Icon: typeof Brain; labelKey: string; blurbKey: string }[] = [
+  { id: 'quick_journal', Icon: PenLine, labelKey: 'qj.title', blurbKey: 'qj.blurb' },
+  { id: 'evening', Icon: BookOpen, labelKey: 'tools.evening', blurbKey: 'tools.evening.blurb' },
   { id: 'decision', Icon: Brain, labelKey: 'tools.decision', blurbKey: 'tools.decision.blurb' },
   { id: 'sift', Icon: Search, labelKey: 'tools.sift', blurbKey: 'tools.sift.blurb' },
-  { id: 'evening', Icon: BookOpen, labelKey: 'tools.evening', blurbKey: 'tools.evening.blurb' },
   { id: 'nvc', Icon: MessageSquareHeart, labelKey: 'tools.nvc', blurbKey: 'tools.nvc.blurb' },
   { id: 'premortem', Icon: AlertTriangle, labelKey: 'tools.premortem', blurbKey: 'tools.premortem.blurb' },
   { id: 'skills', Icon: Layers, labelKey: 'tools.skills', blurbKey: 'tools.skills.blurb' },
@@ -24,9 +31,19 @@ const TOOL_META: { id: Tool; Icon: typeof Brain; labelKey: string; blurbKey: str
   { id: 'exercise', Icon: Dumbbell, labelKey: 'tools.exercise', blurbKey: 'tools.exercise.blurb' },
 ];
 
-export function ToolsView() {
-  const [open, setOpen] = useState<Tool | null>(null);
+interface Props {
+  consumePending?: () => ToolId | null;
+}
+
+export function ToolsView({ consumePending }: Props) {
+  const [open, setOpen] = useState<ToolId | null>(null);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (!consumePending) return;
+    const pending = consumePending();
+    if (pending) setOpen(pending);
+  }, [consumePending]);
 
   if (open) {
     return (
@@ -40,6 +57,7 @@ export function ToolsView() {
         {open === 'skills' && <SkillsAudit />}
         {open === 'reading' && <ReadingLog />}
         {open === 'exercise' && <ExerciseLog />}
+        {open === 'quick_journal' && <QuickJournal />}
       </div>
     );
   }
